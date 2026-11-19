@@ -4,7 +4,18 @@ from PIL import Image, ImageDraw, ImageFont
 W, H, FPS = 1280, 720, 30
 BG = (14, 20, 36); PANEL = (28, 37, 60); TEXT = (236, 240, 248); MUTED = (140, 152, 178)
 TEAL = (46, 196, 182); CORAL = (242, 98, 98); AMBER = (246, 182, 72); LINE = (60, 72, 100)
-FD = "/usr/share/fonts/opentype/inter/"
+def _find_font_dir():
+    candidates = [
+        os.path.join(os.path.dirname(os.path.abspath(__file__)), "fonts"),
+        os.path.expanduser("~/Library/Fonts"),
+        "/usr/share/fonts/opentype/inter",
+    ]
+    for c in candidates:
+        if os.path.isdir(c) and os.path.exists(os.path.join(c, "Inter-Regular.otf")):
+            return c if c.endswith("/") else c + "/"
+    return "/usr/share/fonts/opentype/inter/"
+
+FD = _find_font_dir()
 _fc = {}
 def font(size, w="SemiBold"):
     k = (size, w)

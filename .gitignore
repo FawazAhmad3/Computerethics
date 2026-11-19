@@ -19,7 +19,16 @@ env/
 venv/
 ENV/
 
+# Temporary build artifacts & audio
+_temp_*/
+*.wav
+concat.txt
+
+# Local fonts
+fonts/
+
 # System / IDE
 .DS_Store
 .idea/
 .vscode/
+
